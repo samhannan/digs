@@ -4,29 +4,35 @@ namespace controllers;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use controllers\Controller;
 
 class ApiController extends Controller
 {
 	private $app;
-	private $Town;
 	private $httpExceptionService;
+	private $Town;
 
-	public function __construct($app, $twig, $httpExceptionService)
+	public function __construct($twig, $httpExceptionService, $Town)
 	{
-		$this->app = $app;
 		$this->httpExceptionService = $httpExceptionService;
+		$this->Town = $Town;
 
 		parent::__construct($twig);
 	}
 
-	public function getTownsJsonAction($request, $search, $Town)
+	/**
+	 * @param  Get all towns for search auto-complete
+	 * @param  string $search search term
+	 * @return json
+	 */
+	public function getTownsJsonAction(Request $request, $search)
 	{
 		if(!$this->isAjaxRequest($request)) {
 			return $this->httpExceptionService->throwException(404);
 		}
 
-		$Towns = $Town
+		$Towns = $this->Town
 			->where('name', 'LIKE', '%'.$search.'%')
 			->pluck('name', 'id');
 
@@ -39,6 +45,6 @@ class ApiController extends Controller
 			];
 		}
 
-		return $this->app->json($TownsArr);
+		return new JsonResponse($TownsArr);
 	}
 }

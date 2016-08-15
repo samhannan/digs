@@ -11,6 +11,11 @@ class Controller
 		$this->renderer = $twig;
 	}	
 
+	/**
+	 * Determines whether current request is ajax
+	 * @param  object $request
+	 * @return boolean
+	 */
 	protected function isAjaxRequest($request)
 	{
 		return $request->isXmlHttpRequest();

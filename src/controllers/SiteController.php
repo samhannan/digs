@@ -3,22 +3,21 @@
 namespace controllers;
 
 use controllers\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class SiteController extends Controller
 {
-	protected $Town;
-
 	public function __construct($twig)
 	{
 		parent::__construct($twig);
 	}
 
-	public function indexAction($Town)
+	/**
+	 * Site index
+	 * @return [type]
+	 */
+	public function indexAction()
 	{
-		$Towns = $Town->all();
-
-		return $this->renderer->render('index.twig', array(
-			'Towns' => $Towns
-		));
+		return $this->renderer->render('index.twig', array());
 	}
 }

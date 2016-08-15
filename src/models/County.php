@@ -1,6 +1,6 @@
 <?php
 
-namespace models;
+namespace Models;
 
 class County extends \Illuminate\Database\Eloquent\Model
 {

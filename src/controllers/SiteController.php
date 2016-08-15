@@ -1,8 +1,8 @@
 <?php
 
-namespace controllers;
+namespace Controllers;
 
-use controllers\Controller;
+use Controllers\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class SiteController extends Controller
